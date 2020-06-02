@@ -1,9 +1,17 @@
 package Facility_Management;
 
-public class FacilityAttribute extends Facility{
+public class FacilityAttributeDTO extends FacilityDTO{
 	private int facilityState;
 	private String facilityManager;
 	private String facilityPhoneNumber;
+	
+	public FacilityAttributeDTO(String touristSite, String facility, int facilityState, String facilityManager,
+			String facilityPhoneNumber) {
+		super(touristSite, facility);
+		this.facilityState = facilityState;
+		this.facilityManager = facilityManager;
+		this.facilityPhoneNumber = facilityPhoneNumber;
+	}
 	
 	public void setFacilityState(int facilityState) {
 		this.facilityState = facilityState;
@@ -24,3 +32,13 @@ public class FacilityAttribute extends Facility{
 		return this.facilityPhoneNumber;
 	}
 }
+
+/**
+	모듈 설계자 : 박성용
+	
+	검토자 :
+	검토 날짜:
+	
+	수정 일자 :
+	수정 내용 :
+**/

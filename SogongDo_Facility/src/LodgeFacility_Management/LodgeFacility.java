@@ -1,8 +1,8 @@
 package LodgeFacility_Management;
 
-import Facility_Management.Facility;
+import Facility_Management.FacilityDTO;
 
-public class LodgeFacility extends Facility{
+public class LodgeFacility{
 	private int lodgeNumber;
 	private int roomNumber;
 	
@@ -19,3 +19,13 @@ public class LodgeFacility extends Facility{
 		return this.roomNumber;
 	}
 }
+
+/**
+	모듈 설계자 : 박성용
+	
+	검토자 :
+	검토 날짜:
+	
+	수정 일자 :
+	수정 내용 :
+**/
