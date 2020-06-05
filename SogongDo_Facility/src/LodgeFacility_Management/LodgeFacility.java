@@ -1,6 +1,6 @@
 package LodgeFacility_Management;
 
-import Facility_Management.FacilityDTO;
+import Facility_Management.persistence.FacilityDTO;
 
 public class LodgeFacility{
 	private int lodgeNumber;

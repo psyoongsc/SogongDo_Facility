@@ -1,13 +1,13 @@
-package Facility_Management;
+package Facility_Management.persistence;
 
 public class FacilityAttributeDTO extends FacilityDTO{
 	private int facilityState;
 	private String facilityManager;
 	private String facilityPhoneNumber;
 	
-	public FacilityAttributeDTO(String touristSite, String facility, int facilityState, String facilityManager,
+	public FacilityAttributeDTO(String touristSiteName, int facilityID, String facilityName, int facilityState, String facilityManager,
 			String facilityPhoneNumber) {
-		super(touristSite, facility);
+		super(touristSiteName, facilityID, facilityName);
 		this.facilityState = facilityState;
 		this.facilityManager = facilityManager;
 		this.facilityPhoneNumber = facilityPhoneNumber;

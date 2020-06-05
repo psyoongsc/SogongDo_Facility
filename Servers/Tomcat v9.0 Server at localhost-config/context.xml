@@ -32,9 +32,9 @@
     	type="javax.sql.DataSource"
     	maxActive="30"
     	maxIdle="3"
-    	maxWait="3000"
+    	maxWait="-1"
     	username="root"
     	password="123123"
-    	textOnBorrow="true"
-    	url="jdbc:mysql://localhost:3307/객소모델?characterEncoding=utf-8&amp;serverTimezone&amp;useSSL=false" />
+    	testOnBorrow="true"
+    	url="jdbc:mysql://localhost:3307/sogongdo?characterEncoding=utf-8&amp;serverTimezone&amp;useSSL=false" />
 </Context>
