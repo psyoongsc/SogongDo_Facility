@@ -2,19 +2,18 @@ package Facility_Management.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Facility_Management.persistence.FacilityDAO;
-import Facility_Management.persistence.FacilityDTO;
+import Facility_Management.persistence.FacilityAttributeDAO;
+import Facility_Management.persistence.FacilityAttributeDTO;
 
-@WebServlet("/updateFacility")
-public class FacilityUpdateControl extends HttpServlet{
-private FacilityDAO facilityDAO = new FacilityDAO();
+@WebServlet("/updateFacilityAttribute")
+public class FacilityAttributeUpdateControl extends HttpServlet{
+	private FacilityAttributeDAO facilityAttributeDAO = new FacilityAttributeDAO();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,7 +23,10 @@ private FacilityDAO facilityDAO = new FacilityDAO();
 		String tName = req.getParameter("Tourist_Site_Name");
 		int fID = Integer.parseInt(req.getParameter("Facility_ID"));
 		String fName = req.getParameter("Facility_Name");
+		int fStatus = Integer.parseInt(req.getParameter("Facility_Status"));
+		String fManager = req.getParameter("Facility_Manager");
+		String fPhoneNumber = req.getParameter("Facility_PhoneNumber");
 		
-		facilityDAO.updateFacilityInfo(new FacilityDTO(tName, fID, fName));
+		facilityAttributeDAO.updateFacilityAttributeInfo(new FacilityAttributeDTO(tName, fID, fName, fStatus, fManager, fPhoneNumber));
 	}
 }

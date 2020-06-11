@@ -25,7 +25,6 @@
 		<input readonly type="text" name="Tourist_Site_Name" value=<%=tName %> id="Tourist_Site_Name"/><br/>
 		<label for="Facility_Name">시설명</label>
 		<input type="text" name="Facility_Name" value=<%=fName %> id= "Facility_Name"/><br/>
-		<label for="Facility_ID">시설ID</label>
 		<input type="hidden" name="Facility_ID" value=<%=fID %> id= "Facility_ID"/><br/>
 		
 		<input type="button" value="수정"	onClick = "checkData()"/>
@@ -35,10 +34,6 @@
 </body>
 
 <script type="text/javascript">
-	function reloadParentPage(){
-			window.opener.location.reload();
-	}
-	
 	function checkData(){
 		var enroll = document.enrollForm;
 		
@@ -50,7 +45,8 @@
 			alert("시설명을 입력해주세요");
 		}else{
 			enroll.submit();
-			alert("등록 되었습니다!");
+			alert("수정 되었습니다!");
+			self.close();
 		}
 	}
 </script>

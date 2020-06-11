@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="Facility_Management.persistence.FacilityDAO"%>
-<%@ page import="Facility_Management.persistence.FacilityDTO"%>
+<%@ page import="Facility_Management.persistence.FacilityAttributeDAO"%>
+<%@ page import="Facility_Management.persistence.FacilityAttributeDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +10,13 @@
 </head>
 <body>
 <%
-	FacilityDAO productDAO = new FacilityDAO();
+	FacilityAttributeDAO productDAO = new FacilityAttributeDAO();
 
 	int length = Integer.parseInt(request.getParameter("cnt"));
 	
 	for (int i=0; i<length; i++) {
 		String id = request.getParameter("fID" + i);
-		productDAO.deleteFacilityInfo(new FacilityDTO("", Integer.parseInt(id), ""));
+		productDAO.deleteFacilityAttributeInfo(new FacilityAttributeDTO("", Integer.parseInt(id), "", 0, "", ""));
 	}
 %>
 <script type="text/javascript">

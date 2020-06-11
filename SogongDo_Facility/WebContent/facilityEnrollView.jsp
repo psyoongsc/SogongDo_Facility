@@ -21,16 +21,11 @@
 		
 		<input type="button" value="등록"	onClick = "checkData()"/>
 		<input type="reset" value="취소"/>
-		<input type="button" value="초기화" onClick = "reloadParentPage()"/> 
 	</fieldset>
 </form>
 </body>
 
 <script type="text/javascript">
-	function reloadParentPage(){
-			window.opener.location.reload();
-	}
-	
 	function checkData(){
 		var enroll = document.enrollForm;
 		

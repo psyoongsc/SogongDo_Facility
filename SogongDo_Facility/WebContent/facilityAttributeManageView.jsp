@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="Facility_Management.persistence.FacilityDTO"%>
+<%@ page import="Facility_Management.persistence.FacilityAttributeDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +16,14 @@
 				<td>ID</td>
 				<td>관광지명</td>
 				<td>시설명</td>
+				<td>상태</td>
+				<td>관리자</td>
+				<td>전화번호</td>
 			</tr>
 		</thead>
 		<%
-			List<FacilityDTO> list = (List<FacilityDTO>) request.getAttribute("facilityList");
-			for(FacilityDTO dto : list) {
+			List<FacilityAttributeDTO> list = (List<FacilityAttributeDTO>) request.getAttribute("facilityAttributeList");
+			for(FacilityAttributeDTO dto : list) {
 				pageContext.setAttribute("dto", dto);
 		%>
 			<tr>
@@ -28,10 +31,13 @@
 				<td class="id">${ dto.facilityID }</td>
 				<td class="tName">${ dto.touristSiteName }</td>
 				<td class="fName">${ dto.facilityName }</td>
+				<td class="fState">${ dto.facilityState }</td>
+				<td class="fManager">${ dto.facilityManager }</td>
+				<td class="fPhoneNumber">${ dto.facilityPhoneNumber }</td>
 			</tr>
 		<%}%>
 	</table>
-	<form align="center" action="enrollFacility", method="GET">
+	<form align="center" method="GET">
 		<input type="button" value= "시설등록" id="btnEnroll" onclick="fEnroll()">
 		<input type="button" value= "시설수정" id="btnUpdate" onclick="fUpdate()">
 		<input type="button" value= "시설삭제" id="btnDelete" onclick="fDelete()">
@@ -40,14 +46,14 @@
 
 <script>
 	function fEnroll() { //등록
-	    var url = "/SogongDo_Facility/facilityEnrollView.jsp";
+	    var url = "/SogongDo_Facility/facilityAttributeEnrollView.jsp";
 	    var name = "facilityEnrollView";
-	    var option = "width = 500, height = 180, top = 100, left = 200, location = no"
+	    var option = "width = 500, height = 230, top = 100, left = 200, location = no"
 	    
 	   	window.open(url, name, option);
 	}
 	function fUpdate() { //수정
-		var url = "/SogongDo_Facility/facilityUpdateView.jsp?";
+		var url = "/SogongDo_Facility/facilityAttributeUpdateView.jsp?";
 		var name = "facilityUpdateView";
 		var option = "width = 500, height = 200, top = 100, left = 200, location = no"
 		
@@ -58,6 +64,9 @@
 		const fId = document.querySelectorAll(".id");
 		const tName = document.querySelectorAll(".tName");
 		const fName = document.querySelectorAll(".fName");
+		const fState = document.querySelectorAll(".fState");
+		const fManager = document.querySelectorAll(".fManager");
+		const fPhoneNumber = document.querySelectorAll(".fPhoneNumber");
 		
 		for(var i=0; i<chBox.length; i++) {
 			if(chBox[i].checked) {
@@ -70,13 +79,14 @@
 		} else if (cnt > 1) {
 			alert("항목을 하나만 선택해주세요.");
 		} else {
-			url += "fID=" + fId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText;
+			url += "fID=" + fId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText
+			 + "&fStatus=" + fState[ci].innerText + "&fManager=" + fManager[ci].innerText + "&fPhoneNumber=" + fPhoneNumber[ci].innerText;
 
 			window.open(url, name, option);
 		}
 	}
 	function fDelete() { //삭제
-		var url = "/SogongDo_Facility/facilityDeleteView.jsp?";
+		var url = "/SogongDo_Facility/facilityAttributeDeleteView.jsp?";
 		var name = "facilityDeleteView";
 		var option = "width = 360, height = 200, top = 100, left = 200, location = no"
 		
@@ -101,7 +111,7 @@
 				}
 			}
 			
-			var ox = confirm("시설 정보를 정말 삭제하시겠습니까?");
+			var ox = confirm("시설 속성정보를 정말 삭제하시겠습니까?");
 			if(ox){
 				window.open(url, name, option);
 			}
