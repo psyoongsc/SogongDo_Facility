@@ -14,7 +14,7 @@ import Facility_Management.persistence.FacilityDTO;
 
 @WebServlet("/updateFacility")
 public class FacilityUpdateControl extends HttpServlet{
-private FacilityDAO facilityDAO = new FacilityDAO();
+	private FacilityDAO facilityDAO = new FacilityDAO();
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

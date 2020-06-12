@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import Facility_Management.persistence.FacilityDAO;
 import Facility_Management.persistence.FacilityDTO;
 
-@WebServlet("/facility/")
+@WebServlet("/facility")
 public class FacilityManageControl extends HttpServlet{
 	private FacilityDAO facilityDAO = new FacilityDAO();
 	

@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="Facility_Management.persistence.FacilityDTO"%>
+<%@ page import="LodgeFacility_Management.persistence.LodgeFacilityDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,18 +16,22 @@
 				<td>ID</td>
 				<td>관광지명</td>
 				<td>시설명</td>
+				<td>동</td>
+				<td>호</td>
 			</tr>
 		</thead>
 		<%
-			List<FacilityDTO> list = (List<FacilityDTO>) request.getAttribute("facilityList");
-			for(FacilityDTO dto : list) {
+			List<LodgeFacilityDTO> list = (List<LodgeFacilityDTO>) request.getAttribute("lodgeFacilityList");
+			for(LodgeFacilityDTO dto : list) {
 				pageContext.setAttribute("dto", dto);
 		%>
 			<tr>
 				<td><input type="checkbox" class="checkBox"></td>
-				<td class="id">${ dto.facilityID }</td>
+				<td class="id">${ dto.lodgeFacilityID }</td>
 				<td class="tName">${ dto.touristSiteName }</td>
 				<td class="fName">${ dto.facilityName }</td>
+				<td class="lNum">${ dto.lodgeNumber }</td>
+				<td class="rNum">${ dto.roomNumber }</td>
 			</tr>
 		<%}%>
 	</table>
@@ -40,24 +44,26 @@
 
 <script>
 	function fEnroll() { //등록
-	    var url = "/SogongDo_Facility/facilityEnrollView.jsp";
-	    var name = "facilityEnrollView";
-	    var option = "width = 500, height = 180, top = 100, left = 200, location = no"
+	    var url = "/SogongDo_Facility/lodgeFacilityEnrollView.jsp";
+	    var name = "lodgeFacilityEnrollView";
+	    var option = "width = 500, height = 260, top = 100, left = 200, location = no"
 	    
 	   	window.open(url, name, option);
 	}
 	function fUpdate() { //수정
-		var url = "/SogongDo_Facility/facilityUpdateView.jsp?";
-		var name = "facilityUpdateView";
-		var option = "width = 500, height = 200, top = 100, left = 200, location = no"
+		var url = "/SogongDo_Facility/lodgeFacilityUpdateView.jsp?";
+		var name = "lodgeFacilityUpdateView";
+		var option = "width = 500, height = 270, top = 100, left = 200, location = no"
 		
 		var cnt = 0;
 		var ci;
 		
 		const chBox = document.querySelectorAll(".checkBox");
-		const fId = document.querySelectorAll(".id");
+		const lfId = document.querySelectorAll(".id");
 		const tName = document.querySelectorAll(".tName");
 		const fName = document.querySelectorAll(".fName");
+		const lNum = document.querySelectorAll(".lNum");
+		const rNum = document.querySelectorAll(".rNum");
 		
 		for(var i=0; i<chBox.length; i++) {
 			if(chBox[i].checked) {
@@ -70,14 +76,14 @@
 		} else if (cnt > 1) {
 			alert("항목을 하나만 선택해주세요.");
 		} else {
-			url += "fID=" + fId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText;
+			url += "lfID=" + lfId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText + "&lNum=" + lNum[ci].innerText + "&rNum=" + rNum[ci].innerText;
 
 			window.open(url, name, option);
 		}
 	}
 	function fDelete() { //삭제
-		var url = "/SogongDo_Facility/facilityDeleteView.jsp?";
-		var name = "facilityDeleteView";
+		var url = "/SogongDo_Facility/lodgeFacilityDeleteView.jsp?";
+		var name = "lodgeFacilityDeleteView";
 		var option = "width = 360, height = 200, top = 100, left = 200, location = no"
 		
 		var cnt = 0;
@@ -101,7 +107,7 @@
 				}
 			}
 			
-			var ox = confirm("시설 정보를 정말 삭제하시겠습니까?");
+			var ox = confirm("숙박시설 정보를 정말 삭제하시겠습니까?");
 			if(ox){
 				window.open(url, name, option);
 			}
