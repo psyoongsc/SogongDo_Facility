@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="Facility_Management.Facility"/>
+<fullyQualifiedTypeName name="java.beans.Statement"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="Facility_Management.FacilityDAO"/>
+<fullyQualifiedTypeName name="Facility_Management.persistence.FacilityDTO"/>
+<fullyQualifiedTypeName name="Facility_Management.persistence.FacilityAttributeDAO"/>
+<fullyQualifiedTypeName name="Facility_Management.controller.FacilityAttributeUpdateControl"/>
+<fullyQualifiedTypeName name="Facility_Management.persistence.FacilityAttributeDTO"/>
+<fullyQualifiedTypeName name="LodgeFacility_Management.persistence.LodgeFacilityDTO"/>
+<fullyQualifiedTypeName name="javax.naming.InitialContext"/>
+<fullyQualifiedTypeName name="javax.naming.Context"/>
+<fullyQualifiedTypeName name="javax.sql.DataSource"/>
+<fullyQualifiedTypeName name="javax.naming.NamingException"/>
+<fullyQualifiedTypeName name="LodgeFacility_Management.persistence.LodgeFacilityDAO"/>
+<fullyQualifiedTypeName name="org.omg.CORBA.Request"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+<fullyQualifiedTypeName name="Product_Mgmt.persistance.ProductDAO"/>
+<fullyQualifiedTypeName name="Product_Mgmt.persistance.Product"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+</qualifiedTypeNameHistroy>

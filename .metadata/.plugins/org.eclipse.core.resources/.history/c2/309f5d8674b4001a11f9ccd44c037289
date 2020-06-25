@@ -1,0 +1,28 @@
+package Authority_Mgmt.persistance;
+
+public class AuthorityDTO {
+    private int AuthorityID;
+    private String MemberID;
+
+    public AuthorityDTO(int id, String mid){
+        super();
+        this.AuthorityID=id;
+        this.MemberID=mid;
+    }
+
+    public int getAuthorityID() {
+        return AuthorityID;
+    }
+
+    public void setAuthorityID(int authorityID) {
+        AuthorityID = authorityID;
+    }
+
+    public String getMemberID() {
+        return MemberID;
+    }
+
+    public void setMemberID(String memberID) {
+        MemberID = memberID;
+    }
+}

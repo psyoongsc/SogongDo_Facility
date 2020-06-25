@@ -1,0 +1,57 @@
+package Product_Mgmt.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Product_Mgmt.persistance.Product;
+import Product_Mgmt.persistance.ProductDAO;
+
+@WebServlet("/updateProduct")
+public class UpdateProductController extends HttpServlet{
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		requestUpdateProduct(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		requestUpdateProduct(req, resp);
+	}
+
+	private void requestUpdateProduct(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");   
+		resp.setContentType("text/html;charset=utf-8"); 
+        
+		String id=req.getParameter("Product_ID");
+        String name=req.getParameter("Product_Name");
+        String kinds=req.getParameter("Product_Kinds");
+        int price=Integer.parseInt(req.getParameter("Product_Price"));
+        int stock=Integer.parseInt(req.getParameter("Product_Stock"));
+        Product products = new Product(id,name,kinds,price,stock);
+        
+        ProductDAO productDAO = new ProductDAO();
+        String updateCheck = Integer.toString(productDAO.updateProduct(products));
+        req.setAttribute("updateCheck", updateCheck); //jsp ?éò?ù¥Ïß?Î°? ?ÑòÍ∏∞Í∏∞
+        
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/UpdateProductView.jsp");
+        dispatcher.forward(req, resp);
+	}
+}
+/*
+Î™®Îìà ?Ñ§Í≥ÑÏûê : Î∞ïÏÑ±?ö©
+
+Í≤??Ü†?ûê : Î∞ïÏÑ±?ö©, Íπ??ù∏?ôò
+Í≤??Ü† ?Ç†Ïß?: 2020-06-05
+
+?àò?†ï ?ùº?ûê : 2020-06-08
+?àò?†ï ?Ç¥?ö© : updateProduct?ùò Î∞òÌôò Í∞? ?Ñ§?†ï
+
+*/

@@ -1,0 +1,66 @@
+<%--
+    모듈 설계자 : 이희수
+
+    검토자 : 박성용
+    검토 날짜: 2020/06/12
+
+    수정 일자 :
+    수정 내용 :
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	<%@ page import = "java.util.*" %>
+	<%@ page import = "TouristSite_Mgmt.persistance.TouristSiteDTO" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>관광지 조회</title>
+</head>
+<body>
+
+	<form action="/SogongDo_Management_System/inquireTouristSite" , method="GET">
+		<h2>관광지 목록</h2>
+			<label>관광지 이름&nbsp;:&nbsp;<input type="text" name="name"
+				autofocus></label>
+			<button type='submit'>검색</button>
+			<br>
+			<br>
+			<table border="1" cellpadding="5">
+				<tr>
+					<th>관광지 ID</th>
+					<th>관광지 이름</th>
+					<th>속성</th>
+					<th>작업</th>
+				</tr>
+				<%
+					List<TouristSiteDTO> temp = (List<TouristSiteDTO>) request.getAttribute("tourist_site_list");
+							if(temp !=null) {
+								for (int i = 0; i < temp.size(); i++) {
+				%>
+					<tr>
+						<td><%=temp.get(i).getTourist_site_id() %></td>
+						<td><%=temp.get(i).getTourist_site_name() %></td>
+						<td>
+							<button type="button"
+								onclick="window.open('/TouristSiteManagement/inquireTouristSiteAttribute?tourist_site_id=<%=temp.get(i).getTourist_site_id() %>','관광지  속성 조회','width=450,height=400,location=no,status=no');">조회</button>
+						</td>
+						<td>
+							<button type="button"
+								onclick="window.open('/TouristSiteManagement/UpdateTouristSiteView.jsp?tourist_site_id=<%=temp.get(i).getTourist_site_id() %>&tourist_site_name=<%=temp.get(i).getTourist_site_name() %>','관광지 수정','width=450,height=200,location=no,status=no');">수정</button>
+							<button type="button"
+								onclick="window.open('/TouristSiteManagement/DeleteTouristSiteView.jsp?tourist_site_id=<%=temp.get(i).getTourist_site_id() %>&tourist_site_name=<%=temp.get(i).getTourist_site_name() %>','관광지 삭제','width=400,height=180,location=no,status=no');">삭제</button>
+						</td>
+					</tr>
+					<%
+						} }
+					%>
+			</table>
+	</form>
+	<br>
+	<button
+		onclick="window.open('/TouristSiteManagement/RegisterTouristSiteView.jsp','관광지 등록','width=450,height=200,location=no,status=no');">관광지
+		등록</button>
+</body>
+
+</html>

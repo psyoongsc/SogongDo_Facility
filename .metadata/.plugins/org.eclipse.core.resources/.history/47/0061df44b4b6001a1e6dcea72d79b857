@@ -1,0 +1,35 @@
+package com.TouristSiteManagement;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/inquireTouristSiteAttribute")
+public class InquireTouristSiteAttributeController extends HttpServlet{
+	private TouristSiteDAO ts = new TouristSiteDAO();
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException  {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		TouristSite touristSite = null;
+		TouristSiteAttribute attribute = null;
+		try {
+			touristSite = ts.getTouristSite(tourist_site_id);
+			attribute = ts.getAttribute(tourist_site_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("touristSite", touristSite);
+		request.setAttribute("attribute", attribute);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("InquireTouristSiteAttributeView.jsp");
+		dispatcher.forward(request, response);
+	}
+}

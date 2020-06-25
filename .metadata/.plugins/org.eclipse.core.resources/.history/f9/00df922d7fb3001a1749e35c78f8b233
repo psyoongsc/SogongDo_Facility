@@ -1,0 +1,36 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>관광지 속성 등록</title>
+</head>
+<body>
+	<form name = "registerForm", method="GET">
+        <h1>관광지 속성 등록</h1>
+        <fieldset>
+            <legend>관광지 속성</legend>
+            <div>
+                <input type="hidden" name="tourist_site_id" value="${tourist_site_id}"> 
+             	<label>주소 &nbsp;&nbsp;<input type="text" name="tourist_site_address" autofocus></label> <br>
+             	<label>연락처 &nbsp;&nbsp;<input type="text" name="tourist_site_phone_number"></label> <br>
+                <label>사업자등록번호&nbsp;&nbsp;<input type="text" name="registration_number"></label> <br>
+                <label>대표자 이름&nbsp;&nbsp;<input type="text" name="representative_name"></label> <br> <br>
+            </div>
+        </fieldset>
+	</form>
+	<input type="button" onclick="doSubmit()" value="등록">
+    <button onclick="window.self.close()">취소</button>
+</body>
+<script>
+function doSubmit()
+{
+	window.opener.name = "attributes_main";
+	document.registerForm.target = "attributes_main";
+	document.registerForm.action = "/TouristSiteManagement/registerTouristSiteAttributes";
+	document.registerForm.submit();
+	window.self.close();
+}
+</script>
+</html>

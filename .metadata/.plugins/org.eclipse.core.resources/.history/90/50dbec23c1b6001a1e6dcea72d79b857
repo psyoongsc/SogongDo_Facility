@@ -1,0 +1,151 @@
+<%@ page import = "java.util.List" %>
+<%@ page import="Refund_Mgmt.persistance.RefundDTO"%>
+<%@ page import="Refund_Mgmt.persistance.RefundDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>숙박시설 환불내역</title>
+	
+ 	<style type="text/css">
+ 	
+        table {
+    		width: 70%;
+    		border: 5pt groove #3f51b5;
+   			border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 30px;
+  		}
+  		
+        .Table >thead > tr > th{
+            height: 16px;
+            border: 1px #dfdfdf solid;
+            background: #00ccff;
+            vertical-align: middle;
+            border: 1px solid #444444;
+    		padding: 10px;
+        }
+        
+        .Table >tbody > tr > td {
+    		border: 1px solid #444444;
+    		padding: 10px;
+  		}
+		
+	</style>
+	
+</head>
+<body>
+    <div class="m_contents">
+        <div class="refund_contents">
+            <h4>숙박시설 환불내역</h4>
+           	
+           	
+            <table class="Table">
+                <thead>
+                    <tr><th class="ch"></th>
+                        <th>예약 ID</th>
+                        <th>환불 금액</th>
+                        <th>환불 방법</th>
+                        <th>환불 날짜</th>
+                        <th>환불 계좌</th>
+                    </tr>
+                </thead>
+                <%
+                	List<RefundDTO> pdList = (List<RefundDTO>) request.getAttribute("refundList");
+                                	for(RefundDTO dto : pdList){
+                                		pageContext.setAttribute("dto", dto);
+                %>
+                
+                
+                    <tr>
+                        <td class="ch">
+                    	<input type="checkbox" name="columncheck" onclick="oneCheckbox(this)">
+                		</td>
+                        <td>${dto.reservation_ID}</td>
+                        <td>${dto.refund_Amount}</td>
+                        <td>${dto.refund_Method}</td>
+                        <td>${dto.refund_Date}</td>
+                        <td>${dto.refund_Account}</td>
+                    </tr>
+                
+                <%} %>
+            </table>
+        <button class="btn" onclick="showEnrollView()">등록</button>
+        <button class="btn" onclick="deleteRefund()">삭제</button>
+        <button class="btn" onclick="updatePopUp()">수정</button>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+
+function showEnrollView() { //등록
+	
+    var url = "/SogongDo_Management_System/Refund_Mgmt/RefundEnrollView.jsp";
+    var title = "RefundEnrollView";
+    var option = "width = 500, height = 400, top = 100, left = 200, location = no"
+   	window.open(url, title, option);
+}
+
+function oneCheckbox(a){
+	
+    var obj = document.getElementsByName("columncheck");
+    for(var i=0; i<obj.length; i++){
+        if(obj[i] != a){
+            obj[i].checked = false;
+        }
+    }
+    
+}
+
+function deleteRefund()
+{	
+	var checkbox = $("input:checkbox[name=columncheck]:checked");
+	checkbox.each(function(i) {
+		var tr = checkbox.parent().parent().eq(i);
+		var td = tr.children();
+		
+		var reservation = td.eq(1).text();
+		var con_test = confirm(reservation+ "을(를) 정말로 삭제하겠습니까?");
+		if(con_test) location.href = "/SogongDo_Management_System/RefundDelete?id="+reservation;
+	});
+	
+}
+
+function updatePopUp(){
+	  
+    var rowData = new Array();
+	var tdArr = new Array();
+	var checkbox = $("input:checkbox[name=columncheck]:checked");
+	
+	checkbox.each(function(i) {
+
+		var tr = checkbox.parent().parent().eq(i);
+		var td = tr.children();
+		rowData.push(tr.text());
+		
+		var reservation = td.eq(1).text();
+		var amount = td.eq(2).text();
+		var method = td.eq(3).text();
+		var date = td.eq(4).text();
+		var account = td.eq(5).text();
+		
+		
+		var url = "/SogongDo_Management_System/Refund_Mgmt/RefundUpdateView.jsp?reservation="+reservation+"&amount="+amount+"&method="+method+"&date="+date
+		+"&account="+account;
+	    var title = "RefundUpdateView";
+	    var option = "width = 400, height = 300, top = 300, left = 700, location = no"
+	   	window.open(url, title, option);
+	});
+}
+
+</script>
+
+</html>

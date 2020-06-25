@@ -1,0 +1,220 @@
+/*
+    모듈 설계자 : 이희수
+
+    검토자 : 박성용
+    검토 날짜: 2020/06/12
+
+    수정 일자 :
+    수정 내용 :
+*/
+package Tourist_Mgmt.persistance;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TouristSiteDAO {
+
+	private String url;
+	private String username;
+	private String password;
+	private Connection connection;
+	private Statement statement;
+
+	public TouristSiteDAO(String url, String username, String password) {
+		this.url = url;
+		this.username = username;
+		this.password = password;
+	}
+
+	protected void connect() throws SQLException {
+		if (connection == null || connection.isClosed()) {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				throw new SQLException(e);
+			}
+			connection = DriverManager.getConnection(url, username, password);
+		}
+	}
+
+	protected void disconnect() throws SQLException {
+		if (connection != null && !connection.isClosed()) {
+			connection.close();
+		}
+	}
+
+	public List<TouristSite> getTouristSiteByName(String name) throws SQLException {
+		List<TouristSite> list = new ArrayList<>();
+		String sqlstr = "select * from tourist_site where tourist_Site_Name like '%" + name + "%'";
+
+		connect();
+		statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sqlstr);
+
+		while (resultSet.next()) {
+			int tourist_site_id = resultSet.getInt("Tourist_Site_ID");
+			String tourist_site_name = resultSet.getString("tourist_Site_Name");
+
+			TouristSite temp = new TouristSite(tourist_site_id, tourist_site_name);
+			list.add(temp);
+		}
+
+		resultSet.close();
+		statement.close();// test
+		disconnect();
+
+		return list;
+	}
+
+	public List<TouristSite> getAllTouristSite() throws SQLException {
+		List<TouristSite> list = new ArrayList<>();
+
+		String sqlstr = "select * from tourist_site";
+		connect();
+		statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sqlstr);
+
+		while (resultSet.next()) {
+			int tourist_site_id = resultSet.getInt("Tourist_Site_ID");
+			String tourist_site_name = resultSet.getString("tourist_Site_Name");
+
+			TouristSite temp = new TouristSite(tourist_site_id, tourist_site_name);
+			list.add(temp);
+		}
+
+		resultSet.close();
+		statement.close();// test
+		disconnect();
+
+		return list;
+	}
+
+	public TouristSite getTouristSite(int id) throws SQLException {
+		TouristSite temp = null;
+		String sqlstr = "select * from tourist_site where tourist_site_id = " + id;
+		connect();
+		statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sqlstr);
+
+		if (resultSet.next()) {
+			int tourist_site_id = resultSet.getInt("Tourist_Site_ID");
+			String tourist_site_name = resultSet.getString("tourist_Site_Name");
+
+			temp = new TouristSite(tourist_site_id, tourist_site_name);
+		}
+		resultSet.close();
+		statement.close();
+		disconnect();
+		return temp;
+	}
+
+	public String getLastTouristSiteId() throws SQLException {
+		String last_tourist_site_id = "TS000";
+		String sqlstr = "select max(tourist_site_id) as maxId from tourist_site";
+		connect();
+		statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sqlstr);
+
+		if (resultSet.next()) {
+			if(resultSet.getString("maxId") != null)
+			{
+				last_tourist_site_id = resultSet.getString("maxId");
+			}
+		}
+		resultSet.close();
+		statement.close();
+		disconnect();
+		return last_tourist_site_id;
+	}
+
+	public void insertTouristSite(TouristSite touristSite) throws SQLException {
+		String sqlstr = "insert into tourist_site values(null, '"
+				+ touristSite.getTourist_site_name() + "')";
+		connect();
+		statement = connection.createStatement();
+		statement.executeUpdate(sqlstr);
+		statement.close();// test
+		disconnect();
+	}
+
+	public void updateTouristSite(TouristSite touristSite) throws SQLException {
+		String sqlstr = "update tourist_site set tourist_site_name = '" + touristSite.getTourist_site_name()
+				+ "' where tourist_site_id = '" + touristSite.getTourist_site_id() + "'";
+		connect();
+		statement = connection.createStatement();
+		statement.executeUpdate(sqlstr);
+		statement.close();// test
+		disconnect();
+	}
+
+	public void deleteTouristSite(int id) throws SQLException {
+		String sqlstr = "delete from tourist_site where tourist_site_id = " + id ;
+		connect();
+		statement = connection.createStatement();
+		statement.executeUpdate(sqlstr);
+		statement.close();// test
+		disconnect();
+	}
+
+	// -------------------- TouristSite Attribute Data Access
+
+	public TouristSiteAttribute getAttribute(int id) throws SQLException {
+		TouristSiteAttribute temp = null;
+		String sqlstr = "select * from tourist_site_attribute where tourist_site_id = " + id;
+		connect();
+		statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery(sqlstr);
+
+		if (resultSet.next()) {
+			int tourist_site_id = resultSet.getInt("Tourist_Site_ID");
+			String tourist_site_address = resultSet.getString("Tourist_Site_Address");
+			String tourist_site_phone_number = resultSet.getString("Tourist_Site_Phone_Number");
+			int registration_number = resultSet.getInt("Registration_Number");
+			String representative_name = resultSet.getString("Representative_Name");
+			temp = new TouristSiteAttribute(tourist_site_id, tourist_site_address, tourist_site_phone_number, registration_number, representative_name);
+		}
+		resultSet.close();
+		statement.close();
+		disconnect();
+		return temp;
+	}
+	
+	public void insertAttribute(TouristSiteAttribute Attribute) throws SQLException {
+		String sqlstr = "insert into tourist_site_attribute values('" + Attribute.getTourist_site_id() + "', '"
+				+ Attribute.getTourist_site_address() + "', '" + Attribute.getTourist_site_phone_number() + "', '"
+				+ Attribute.getRegistration_number() + "', '" + Attribute.getRepresentative_name() + "')";
+		connect();
+		statement = connection.createStatement();
+		statement.executeUpdate(sqlstr);
+		statement.close();// test
+		disconnect();
+	}
+
+	public void updateAttribute(TouristSiteAttribute Attribute) throws SQLException {
+		String sqlstr = "update tourist_site_attribute set tourist_site_address = '"
+				+ Attribute.getTourist_site_address() + "' , tourist_site_phone_number = '"
+				+ Attribute.getTourist_site_phone_number() + "' , registration_number = "
+				+ Attribute.getRegistration_number() + " , representative_name = '"
+				+ Attribute.getRepresentative_name() + "' where tourist_site_id = '" + Attribute.getTourist_site_id()+ "'";
+		connect();
+		statement = connection.createStatement();
+		statement.executeUpdate(sqlstr);
+		statement.close();// test
+		disconnect();
+	}
+
+	public void deleteAttribute(int id) throws SQLException {
+		String sqlstr = "delete from tourist_site_attribute where tourist_site_id = " + id;
+		connect();
+		statement = connection.createStatement();
+		statement.executeUpdate(sqlstr);
+		statement.close();// test
+		disconnect();
+	}
+}

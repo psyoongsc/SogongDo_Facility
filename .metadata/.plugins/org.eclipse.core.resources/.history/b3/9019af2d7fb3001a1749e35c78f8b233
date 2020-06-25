@@ -1,0 +1,27 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>관광지 속성 조회</title>
+</head>
+<body>
+	<label>관광지 ID :&nbsp; ${touristSite.tourist_site_id} </label> <br>
+	<label>관광지 이름 :&nbsp; ${touristSite.tourist_site_name} </label> <br>
+     <label>주소           :&nbsp; ${attributes.tourist_site_address} </label> <br>
+	<label>전화번호     :&nbsp; ${attributes.tourist_site_phone_number} </label> <br>
+	<label>사업자번호  :&nbsp; ${attributes.registration_number} </label> <br>
+	<label>대표자 이름:&nbsp; ${attributes.representative_name} </label> <br> <br>
+    <c:if test="${attributes == null}">
+    	<button onclick="window.open('/TouristSiteManagement/showRegisterTouristSiteAttributesView?tourist_site_id=<c:out value='${touristSite.tourist_site_id}' />','관광지 속성 등록','width=400,height=300,location=no,status=no');">속성 등록</button>
+    </c:if>
+    
+     <c:if test="${attributes != null}">
+		<button onclick="window.open('/TouristSiteManagement/showUpdateTouristSiteAttributesView?tourist_site_id=<c:out value='${touristSite.tourist_site_id}' />','관광지 속성 수정','width=400,height=300,location=no,status=no');">속성 수정</button>
+		<button onclick="window.open('/TouristSiteManagement/showDeleteTouristSiteAttributesView?tourist_site_id=<c:out value='${touristSite.tourist_site_id}' />','관광지 속성 삭제','width=400,height=150,location=no,status=no');">속성 삭제</button>
+     </c:if>
+	
+</body>
+</html>

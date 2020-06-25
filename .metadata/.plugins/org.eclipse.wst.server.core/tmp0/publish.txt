@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Thu Jun 25 18:20:41 KST 2020
+org.eclipse.jst.jee.server\:SogongDo_Management_System=C\:\\Users\\psyoo\\Desktop\\\uAE08\uC624\uACF5\uB300\uAD00\uB828\\\uC804\uACF5\\apache-tomcat-9.0.35\\wtpwebapps\\SogongDo_Management_System
+org.eclipse.jst.jee.server\:SogongDo_Facility=C\:\\Users\\psyoo\\Desktop\\\uAE08\uC624\uACF5\uB300\uAD00\uB828\\\uC804\uACF5\\apache-tomcat-9.0.35\\wtpwebapps\\SogongDo_Facility

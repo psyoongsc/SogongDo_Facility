@@ -1,0 +1,247 @@
+/*
+    모듈 설계자 : 이희수
+
+    검토자 : 박성용
+    검토 날짜: 2020/06/12
+
+    수정 일자 :
+    수정 내용 :
+*/
+package TouristSite_Mgmt.controller;
+
+import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import Tourist_Mgmt.persistance.TouristSite;
+import Tourist_Mgmt.persistance.TouristSiteAttribute;
+import Tourist_Mgmt.persistance.TouristSiteDAO;
+
+public class TouristSiteController extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private TouristSiteDAO ts;
+
+	@Override
+	public void init() throws ServletException {
+		String url = getServletContext().getInitParameter("url");
+		String username = getServletContext().getInitParameter("username");
+		String password = getServletContext().getInitParameter("password");
+
+		ts = new TouristSiteDAO(url, username, password);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String action = req.getServletPath();
+
+		try {
+			switch (action) {
+			//----------------- TouristSite
+			case "/inquireTouristSite":
+				inquireTouristSite(req, resp);
+				break;
+			case "/showRegisterTouristSiteView":
+				showRegisterTouristSiteView(req, resp);
+				break;
+			case "/registerTouristSite":
+				registerTouristSite(req, resp);
+				break;
+			case "/showUpdateTouristSiteView":
+				showUpdateTouristSiteView(req, resp);
+				break;
+			case "/updateTouristSite":
+				updateTouristSite(req, resp);
+				break;
+			case "/showDeleteTouristSiteView":
+				showDeleteTouristSiteView(req, resp);
+				break;
+			case "/deleteTouristSite":
+				deleteTouristSite(req, resp);
+				break;
+				//----------------- TouristSite Attribute
+			case "/showInquireTouristSiteAttributeView":
+				showInquireTouristSiteAttributeView(req, resp);
+				break;
+			case "/showRegisterTouristSiteAttributeView":
+				showRegisterTouristSiteAttribute(req, resp);
+				break;
+			case "/registerTouristSiteAttribute":
+				registerTouristSiteAttribute(req, resp);
+				break;
+			case "/showUpdateTouristSiteAttributeView":
+				showUpdateTouristSiteAttributeView(req, resp);
+				break;
+			case "/updateTouristSiteAttribute":
+				updateTouristSiteAttribute(req, resp);
+				break;
+			case "/showDeleteTouristSiteAttributeView":
+				showDeleteTouristSiteAttributeView(req, resp);
+				break;
+			case "/deleteTouristSiteAttribute":
+				deleteTouristSiteAttribute(req, resp);
+				break;
+			default:
+				showAllTouristSite(req, resp);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
+	}
+
+	// ------------- Show TouristSite List
+	private void showAllTouristSite(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		List<TouristSite> tourist_site_list = ts.getAllTouristSite();
+		request.setAttribute("tourist_site_list", tourist_site_list);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("InquireTouristSiteView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	// ------------- Inquire TouristSite
+	private void inquireTouristSite(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
+		List<TouristSite> tourist_site_list = ts.getTouristSiteByName(request.getParameter("name"));
+		request.setAttribute("tourist_site_list", tourist_site_list);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("InquireTouristSiteView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	// ------------- Register TouristSite
+	private void showRegisterTouristSiteView(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("RegisterTouristSiteView.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void registerTouristSite(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		String tourist_site_name = request.getParameter("tourist_site_name");
+		TouristSite temp = new TouristSite(tourist_site_name);
+		ts.insertTouristSite(temp);
+		response.sendRedirect("showAllTouristSite");
+	}
+
+	// ------------- Update TouristSite
+	private void showUpdateTouristSiteView(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		TouristSite touristSite = ts.getTouristSite(tourist_site_id);
+		request.setAttribute("touristSite", touristSite);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UpdateTouristSiteView.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void updateTouristSite(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		String tourist_site_name = request.getParameter("tourist_site_name");
+		TouristSite temp = new TouristSite(tourist_site_id, tourist_site_name);
+		ts.updateTouristSite(temp);
+		response.sendRedirect("showAllTouristSite");
+	}
+
+	// ------------- Delete TouristSite
+	private void showDeleteTouristSiteView(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		TouristSite touristSite = ts.getTouristSite(tourist_site_id);
+		request.setAttribute("touristSite", touristSite);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("DeleteTouristSiteView.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void deleteTouristSite(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		ts.deleteAttribute(tourist_site_id);
+		ts.deleteTouristSite(tourist_site_id);
+		response.sendRedirect("showAllTouristSite");
+	}
+	
+	// ------------- Inquire TouristSite Attribute
+	private void showInquireTouristSiteAttributeView(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, ServletException, IOException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		TouristSite touristSite = ts.getTouristSite(tourist_site_id);
+		TouristSiteAttribute attribute = ts.getAttribute(tourist_site_id);
+		request.setAttribute("touristSite", touristSite);
+		request.setAttribute("attribute", attribute);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("InquireTouristSiteAttributeView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	// ------------- Register TouristSite Attribute
+	private void showRegisterTouristSiteAttribute(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		String tourist_site_id = request.getParameter("tourist_site_id");
+		request.setAttribute("tourist_site_id", tourist_site_id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("RegisterTouristSiteAttributeView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void registerTouristSiteAttribute(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		String tourist_site_name = request.getParameter("tourist_site_address");
+		String tourist_site_phone_number = request.getParameter("tourist_site_phone_number");
+		int registration_number = Integer.parseInt(request.getParameter("registration_number"));
+		String representative_name = request.getParameter("representative_name");
+		TouristSiteAttribute temp = new TouristSiteAttribute(tourist_site_id, tourist_site_name,tourist_site_phone_number,registration_number,representative_name);
+		ts.insertAttribute(temp);
+		response.sendRedirect("showInquireTouristSiteAttributeView?tourist_site_id="+tourist_site_id);
+	}
+
+	// ------------- Update TouristSite Attribute
+	private void showUpdateTouristSiteAttributeView(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		TouristSiteAttribute attribute = ts.getAttribute(tourist_site_id);
+		request.setAttribute("attribute", attribute);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UpdateTouristSiteAttributeView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void updateTouristSiteAttribute(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		String tourist_site_name = request.getParameter("tourist_site_address");
+		String tourist_site_phone_number = request.getParameter("tourist_site_phone_number");
+		int registration_number = Integer.parseInt(request.getParameter("registration_number"));
+		String representative_name = request.getParameter("representative_name");
+		TouristSiteAttribute temp = new TouristSiteAttribute(tourist_site_id, tourist_site_name,tourist_site_phone_number,registration_number,representative_name);
+		ts.updateAttribute(temp);
+		response.sendRedirect("showInquireTouristSiteAttributeView?tourist_site_id="+tourist_site_id);
+	}
+
+	// ------------- Delete TouristSite Attribute
+	private void showDeleteTouristSiteAttributeView(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		String tourist_site_id = request.getParameter("tourist_site_id");
+		request.setAttribute("tourist_site_id", tourist_site_id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("DeleteTouristSiteAttributeView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void deleteTouristSiteAttribute(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int tourist_site_id = Integer.parseInt(request.getParameter("tourist_site_id"));
+		ts.deleteAttribute(tourist_site_id);
+		response.sendRedirect("showInquireTouristSiteAttributeView?tourist_site_id="+tourist_site_id);
+	}
+
+}

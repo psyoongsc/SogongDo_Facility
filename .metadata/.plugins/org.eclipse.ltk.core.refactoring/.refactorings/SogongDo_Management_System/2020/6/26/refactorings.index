@@ -1,0 +1,47 @@
+1592709069930	Rename package 'com'
+1592709200127	Rename package 'controller'
+1592709218449	Rename package 'persistance'
+1592709239981	Rename package 'com.java'
+1592709313684	Move 3 resources to 'Payment_Mgmt'
+1592710514684	Rename package 'Persistance'
+1592710531856	Rename package 'Controller'
+1592710567490	Move 3 resources to 'Reservation_Mgmt'
+1592710581275	Rename package 'Reservation.controller'
+1592710598627	Rename package 'Reservation.persistance'
+1592711422680	Rename package 'Controller'
+1592711458920	Rename package 'Persistance'
+1592711495926	Move 3 resources to 'Reserv_Cancel_Mgmt'
+1592716939732	Delete elements
+1592716948217	Delete elements
+1592716955646	Delete element
+1592717841667	Rename package 'FacilityCharge_Mgmtpersistance'
+1592719342498	Rename package 'com.java'
+1592719359522	Rename package 'controller'
+1592719376021	Rename package 'persistance'
+1592719413701	Move 3 resources to 'Refund_Mgmt'
+1592793538565	Rename package 'com.TouristSiteManagement'
+1592793566254	Delete element
+1592793611823	Move compilation unit
+1592794653589	Move 8 resources to 'TouristSite_Mgmt'
+1592795005623	Move compilation unit
+1592795033646	Delete element
+1592795043461	Delete element
+1592795060466	Delete element
+1592795066597	Delete element
+1592795069610	Delete element
+1592813306123	Delete element
+1593062485623	Delete element
+1593063221688	Delete element
+1593063512796	Rename type 'Product'
+1593063525670	Rename type 'ProductSell'
+1593069459731	Delete elements
+1593069464889	Delete elements
+1593069467432	Delete element
+1593069525484	Rename package 'com.TouristManagement'
+1593069595889	Rename type 'TouristSite'
+1593069609648	Rename type 'TouristSiteAttribute'
+1593069622492	Move compilation units
+1593069641676	Rename package 'Tourist_Mgmt.persistance'
+1593069655117	Move compilation units
+1593069658741	Delete element
+1593069666737	Move 8 resources to 'TouristSite_Mgmt'
