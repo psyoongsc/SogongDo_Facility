@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="LodgeFacility_Mgmt.persistence.LodgeFacilityDAO"%>
 <%@ page import="LodgeFacility_Mgmt.persistence.LodgeFacilityDTO"%>
 <!DOCTYPE html>
@@ -20,6 +20,7 @@
 	}
 %>
 <script type="text/javascript">
+opener.window.location.reload();
 	self.close();
 </script>
 

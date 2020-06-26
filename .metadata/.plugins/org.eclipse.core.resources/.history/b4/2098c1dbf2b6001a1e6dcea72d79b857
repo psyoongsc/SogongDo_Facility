@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>소공도 관광지 관리 시스템</title>
+<style>
+a {
+	text-decoration: none;
+	text-align: center;
+	background-color: #4CAF50;
+	width: 200px;
+	line-height: 50px;
+	font-size: medium;
+	display: inline-block;
+	border-radius: 10px 10px;
+	margin: 2px;
+}
+
+a:link {
+	color: white;
+}
+a:visited {
+	color: white;
+}
+
+.container {
+	text-align: center;
+}
+
+.title {
+	font-weight: bold;
+	margin: 70px 0px;
+}
+</style>
+</head>
+<body>
+	<div class="container title">
+		소공도 관광지 관리 시스템
+	</div>
+	<div class="container">
+		<a href="Member/view">회원 관리</a>
+		<a href="Authority/view">권한 관리</a> <br>
+		<a href="TouristSite/view">관광지 관리</a> <br>
+		<a href="Facility/view">시설 관리</a>
+		<a href="Facility/Attribute/view">시설 속성 관리</a> <br>
+		<a href="Facility/Charge/view">시설 요금 관리</a>
+		<a href="Facility/Charge/discount/view">시설 요금 할인 관리</a> <br>
+		<a href="Reservation/view">예약 관리</a>
+		<a href="Reservation/Cancel/view">예약 취소 관리</a> <br>
+		<a href="Product/view">상품 정보 관리</a>
+		<a href="Product/Sell/view">상품 판매 관리</a> <br>
+		<a href="Payment/view">결제 관리</a>
+		<a href="Refund/view">환불 관리</a> <br>
+	</div>
+</body>
+</html>

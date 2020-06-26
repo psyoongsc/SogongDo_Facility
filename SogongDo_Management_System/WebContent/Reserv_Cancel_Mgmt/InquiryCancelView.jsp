@@ -7,86 +7,60 @@
 <html>
 <head>
 	<title>예약 취소  정보 관리</title>
-	<style>
-	
-body{
-	
-    margin: 0;
-    padding: 0;
-}
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
+		
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
 
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
 
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
 
-.content{
-    width: 100%;
-    height: 30rem;
-}
-
-table {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 10px 5px;
-    border-collapse: collapse;
-    width: 70%;
-    display:block;
-    height:450px;
-    overflow:auto;
-}
-
-th, td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    border: 1px solid #ddd;
-}
-
-thead th{
-    background-color: #B7C6EE;
-}
-
-tbody tr:hover {background-color:#DEE6F8;}
-
-.bt{
-    position: relative;
-    left: 15%;
-   	width : 100px;
-    height : 40px;
-    background-color: #0F1D42;
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-.btC{
-position: relative;
-    left: 36%;
-   	width : 150px;
-    height : 40px;
-    background-color: #0F1D42;
-    border: none;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-</style>
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    left: 10%;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
 </head> 
 <body>
+<%@ include file="../head_banner.jsp" %>
+<h3>숙박 예약 취소 관리</h3>
         <div class="content">
-          	<button class="bt register">등록</button>
-           	<button class="bt delete">삭제</button>
-			<button class="bt update">수정</button>
 
             <table>
                 <thead>
@@ -124,6 +98,12 @@ position: relative;
                 </tbody>
             </table>
           
+        </div>
+        
+        <div>
+        	<button class="bt register">예약취소 등록하기</button>
+           	<button class="bt delete">예약취소 삭제하기</button>
+			<button class="bt update">예약취소 수정하기</button>
         </div>
 
 

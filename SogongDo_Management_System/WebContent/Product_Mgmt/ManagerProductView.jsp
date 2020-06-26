@@ -8,86 +8,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자용 상품 정보</title>
+    <title>상품 관리</title>
 	
- 	<style type="text/css">
- 	
-        table {
-    		width: 100%;
-    		border: 1px solid #444444;
-   			border-collapse: collapse;
-            border-spacing: 0;
-            margin-bottom: 30px;
-  		}
-  		
-        .productTb >thead > tr > th{
-            height: 16px;
-            border: 1px #dfdfdf solid;
-            background: #f2f2f2;
-            vertical-align: middle;
-            
-            border: 1px solid #444444;
-    		padding: 10px;
-        }
-        
-        .productTb >tbody > tr > td {
-    		border: 1px solid #444444;
-    		padding: 10px;
-  		}
-  		
-  		.update{
-  			color : blue;
-  		}
-  		
- 		.delete{
-				color : red;
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
 		}
 		
-	</style>
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
 	
 </head>
 <body>
-    <div class="m_contents">
-        <div class="product_contents">
-            <h4>상품 목록</h4>
-           	<form method="GET">
-           		<input type="button" value= "상품등록" id="btnEnroll" onclick="showEnrollView()">
-           	</form>
-           	
-            <table class="productTb">
-                <thead>
-                    <tr>
-                        <th>상품 코드</th>
-                        <th>상품명</th>
-                        <th>상품 분류</th>
-                        <th>상품 가격</th>
-                        <th>상품 수량</th>
-                        <th>수정</th>
-                        <th>삭제</th>
-                    </tr>
-                </thead>
-                <%
-                	List<ProductDTO> pdList = (List<ProductDTO>) request.getAttribute("productList");
-                                                	for(ProductDTO dto : pdList){
-                                                		pageContext.setAttribute("dto", dto);
-                %>
-                
-                <tbody>
-                    <tr>
-                        <td>${dto.product_ID}</td>
-                        <td>${dto.product_Name}</td>
-                        <td>${dto.product_Kinds}</td>
-                        <td>${dto.product_Price}</td>
-                        <td>${dto.product_Stock}</td>
-                        <td class="update" ><a href="../Product_Mgmt/UpdateProductView.jsp?id=<%=dto.getProduct_ID() %>&name=<%=dto.getProduct_Name() %>
-                        &kinds=<%=dto.getProduct_Kinds()%>&price=<%=dto.getProduct_Price()%>&stock=<%=dto.getProduct_Stock()%>">수정하기</td>
-                        <td class="delete" onclick = "deleteProduct(<%=dto.getProduct_ID() %>)"><a href="#">삭제하기</a></td>
-                    </tr>
-                </tbody>
-                <%} %>
-            </table>
-        </div>
-    </div>
+<%@ include file="../head_banner.jsp" %>
+     <h3>상품 관리</h3>
+    	
+     <table>
+         <thead>
+             <tr>
+                 <th>상품 코드</th>
+                 <th>상품명</th>
+                 <th>상품 분류</th>
+                 <th>상품 가격</th>
+                 <th>상품 수량</th>
+                 <th>수정</th>
+                 <th>삭제</th>
+             </tr>
+         </thead>
+         <%
+         	List<ProductDTO> pdList = (List<ProductDTO>) request.getAttribute("productList");
+                                         	for(ProductDTO dto : pdList){
+                                         		pageContext.setAttribute("dto", dto);
+         %>
+         
+         <tbody>
+             <tr>
+                 <td>${dto.product_ID}</td>
+                 <td>${dto.product_Name}</td>
+                 <td>${dto.product_Kinds}</td>
+                 <td>${dto.product_Price}</td>
+                 <td>${dto.product_Stock}</td>
+                 <td><Button type="button" class="bt" onclick="window.open('/SogongDo_Management_System/Product_Mgmt/UpdateProductView.jsp?id=<%=dto.getProduct_ID() %>&name=<%=dto.getProduct_Name() %>&kinds=<%=dto.getProduct_Kinds()%>&price=<%=dto.getProduct_Price()%>&stock=<%=dto.getProduct_Stock()%>', '상품 수정하기', 'width=450,height=400,location=no,status=no');">수정</Button></td>
+                 <td onclick = "deleteProduct(<%=dto.getProduct_ID() %>)"><Button class="bt">삭제</Button></td>
+             </tr>
+         </tbody>
+         <%} %>
+     </table>
+ 
+	 <form method="GET">
+	    		<input class="bt" style="left:14%" type="button" value= "상품정보 등록하기" id="btnEnroll" onclick="showEnrollView()">
+	 </form>
 
 </body>
 

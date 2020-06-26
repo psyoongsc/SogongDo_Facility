@@ -1,5 +1,6 @@
 package Authority_Mgmt.controller;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,5 +31,14 @@ public class AuthorityDeleteController extends  HttpServlet {
        String name = req.getParameter("id");
        AuthorityDTO dto = new AuthorityDTO(id, name);
        authorityDAO.delete(dto);
+       
+       PrintWriter out = resp.getWriter(); //선언
+       
+       String str="";
+       str = "<script language='javascript'>";
+       str += "opener.window.location.reload();";  //오프너 새로고침
+       str += "self.close();";   // 창닫기
+        str += "</script>";
+       out.print(str);
    }
 }

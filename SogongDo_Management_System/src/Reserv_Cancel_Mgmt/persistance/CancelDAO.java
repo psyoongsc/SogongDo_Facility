@@ -26,7 +26,6 @@ public class CancelDAO {
 
 	// 조회
 	public ArrayList<CancelDTO> inquiryC() {
-		System.out.println("inquiryC 실행");
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -89,7 +88,6 @@ public class CancelDAO {
 
 	// 수정 -> 조회
 	public CancelDTO inquiryC(String rID) {
-		System.out.println("inquiryC(String) 실행");
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -154,7 +152,6 @@ public class CancelDAO {
 
 	// 등록
 	public int registerC(CancelDTO cancel) {
-		System.out.println("registerC 실행");
 		Connection conn = null;
 
 		PreparedStatement st = null;
@@ -260,7 +257,6 @@ public class CancelDAO {
 
 	// 삭제
 	public int deleteC(String[] id) {
-		System.out.println("deleteC 실행");
 		if (id.length <= 0) {
 			return 0;
 		} else {
@@ -330,7 +326,6 @@ public class CancelDAO {
 
 	// 수정
 	public int updateC(String id, CancelDTO cancel) {
-		System.out.println("updateC 실행");
 		Connection conn = null;
 		PreparedStatement st = null;
 		int rs = 0;		

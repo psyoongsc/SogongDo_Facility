@@ -1,28 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>½Ã¼³¼Ó¼º µî·Ï</title>
+<meta charset="UTF-8">
+<title>ì‹œì„¤ì†ì„± ë“±ë¡</title>
 </head>
 <body>
 <form action="/SogongDo_Management_System/Facility/Attribute/enroll" method="Post" name="enrollForm">
 	<fieldset id="enrollBox">
-		<legend>½Ã¼³¼Ó¼º µî·Ï</legend>
-		<label for="Tourist_Site_Name">°ü±¤Áö¸í</label>
+		<legend>ì‹œì„¤ì†ì„± ë“±ë¡</legend>
+		<label for="Tourist_Site_Name">ê´€ê´‘ì§€ëª…</label>
 		<input type="text" name="Tourist_Site_Name" id="Tourist_Site_Name"/><br/>
-		<label for="Facility_Name">½Ã¼³¸í</label>
+		<label for="Facility_Name">ì‹œì„¤ëª…</label>
 		<input type="text" name="Facility_Name" id= "Facility_Name"/><br/>
-		<label for="Facility_State">½Ã¼³»óÅÂ</label>
+		<label for="Facility_State">ì‹œì„¤ìƒíƒœ</label>
 		<input type="text" name="Facility_State" id= "Facility_State"/><br/>
-		<label for="Facility_Manager">½Ã¼³°ü¸®ÀÚ</label>
+		<label for="Facility_Manager">ì‹œì„¤ê´€ë¦¬ì</label>
 		<input type="text" name="Facility_Manager" id= "Facility_Manager"/><br/>
-		<label for="Facility_PhoneNumber">½Ã¼³ÀüÈ­¹øÈ£</label>
+		<label for="Facility_PhoneNumber">ì‹œì„¤ì „í™”ë²ˆí˜¸</label>
 		<input type="text" name="Facility_PhoneNumber" id= "Facility_PhoneNumber"/><br/>
 		
-		<input type="button" value="µî·Ï"	 onClick="checkData()"/>
-		<input type="reset" value="Ãë¼Ò"/>
+		<input type="button" value="ë“±ë¡"	 onClick="checkData()"/>
+		<input type="reset" value="ì·¨ì†Œ"/>
 	</fieldset>
 </form>
 </body>
@@ -36,19 +36,20 @@
 		var fState = document.getElementById('Facility_State').value;
 		var fManager = document.getElementById('Facility_Manager').value;
 		var fPhoneNumber = document.getElementById('Facility_PhoneNumber').value;
-		if(tName == ""){ //ºóÄ­ÀÎ °æ¿ì
-			alert("°ü±¤Áö¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		if(tName == ""){ //ë¹ˆì¹¸ì¸ ê²½ìš°
+			alert("ê´€ê´‘ì§€ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(fName ==""){
-			alert("½Ã¼³¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ì‹œì„¤ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(fState ==""){
-			alert("½Ã¼³»óÅÂ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ì‹œì„¤ìƒíƒœë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(fManager ==""){
-			alert("½Ã¼³°ü¸®ÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ì‹œì„¤ê´€ë¦¬ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(fPhoneNumber ==""){
-			alert("½Ã¼³ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ì‹œì„¤ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else{
 			enroll.submit();
-			alert("µî·Ï µÇ¾ú½À´Ï´Ù!");
+			alert("ë“±ë¡ ë˜ì—ˆìŠµë‹ˆë‹¤!");
+			window.opener.location.reload();
 		}
 	}
 </script>

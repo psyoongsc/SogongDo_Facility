@@ -10,40 +10,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상품 판매 실적 집계</title>
 	
-	<style type="text/css">
-	
-	        table {
-    		width: 100%;
-    		border: 1px solid #444444;
-   			border-collapse: collapse;
-            border-spacing: 0;
-            margin-bottom: 30px;
-  		}
-  		
-        .productTb >thead > tr > th{
-            height: 16px;
-            border: 1px #dfdfdf solid;
-            background: #f2f2f2;
-            vertical-align: middle;
-            
-            border: 1px solid #444444;
-    		padding: 10px;
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
+		
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
         }
-        
-        .productTb >tbody > tr > td {
-    		border: 1px solid #444444;
-    		padding: 10px;
-    		
-  		}
-	
-	</style>
+    </style>
 	
 </head>
 <body>
+<%@ include file="../head_banner.jsp" %>
+<h3>상품 판매 집계</h3>
     <div class="m_contents">
  
         <div class="product_contents">
-            <h4>상품 판매 집계 현황</h4>
             <table class="productTb">
                 <thead>
                     <tr>

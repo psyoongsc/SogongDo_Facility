@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>소공도 관리시스템</title>
+<style>
+a {
+	text-decoration: none;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div>
+		<a href="Member/view">회원 관리</a> <br>
+		<a href="Authority/view">권한 관리</a> <br>
+		<a href="TouristSite/view">관광지 관리</a> <br>
+		<a href="Facility/view">시설 관리</a> <br>
+		<a href="Facility/Attribute/view">시설 속성 관리</a> <br>
+		<a href="Facility/Charge/view">시설 요금 관리</a> <br>
+		<a href="Facility/Charge/discount/view">시설 요금 할인 관리</a> <br>
+		<a href="Reservation/view">예약 관리</a> <br>
+		<a href="Reservation/Cancel/view">예약 취소 관리</a> <br>
+		<a href="Product/view">상품 정보 관리</a> <br>
+		<a href="Product/Sell/view">상품 판매 관리</a> <br>
+		<a href="Payment/view">결제 관리</a> <br>
+		<a href="Refund/view">환불 관리</a> <br>
+	</div>
+</body>
+</html>

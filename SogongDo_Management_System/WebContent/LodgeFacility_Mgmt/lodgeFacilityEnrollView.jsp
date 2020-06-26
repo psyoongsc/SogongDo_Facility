@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¼÷¹Ú½Ã¼³ µî·Ï</title>
+<meta charset="UTF-8">
+<title>ìˆ™ë°•ì‹œì„¤ ë“±ë¡</title>
 <style>
 	#enrollBox{ width:300px;}
 	#enrollBox label{ display: block; width:300px; float:left;}
@@ -13,18 +13,18 @@
 <body>
 <form action="/SogongDo_Management_System/Facility/Lodge/enroll" method="Post" name="enrollForm">
 	<fieldset id="enrollBox">
-		<legend>¼÷¹Ú½Ã¼³ µî·Ï</legend>
-		<label for="Tourist_Site_Name">°ü±¤Áö¸í</label>
+		<legend>ìˆ™ë°•ì‹œì„¤ ë“±ë¡</legend>
+		<label for="Tourist_Site_Name">ê´€ê´‘ì§€ëª…</label>
 		<input type="text" name="Tourist_Site_Name" id="Tourist_Site_Name"/><br/>
-		<label for="Facility_Name">½Ã¼³¸í</label>
+		<label for="Facility_Name">ì‹œì„¤ëª…</label>
 		<input type="text" name="Facility_Name" id= "Facility_Name"/><br/>
-		<label for="Lodge_Number">µ¿</label>
+		<label for="Lodge_Number">ë™</label>
 		<input type="text" name="Lodge_Number" id= "Lodge_Number"/><br/>
-		<label for="Room_Number">È£</label>
+		<label for="Room_Number">í˜¸</label>
 		<input type="text" name="Room_Number" id= "Room_Number"/><br/>
 		
-		<input type="button" value="µî·Ï"	onClick = "checkData()"/>
-		<input type="reset" value="Ãë¼Ò"/>
+		<input type="button" value="ë“±ë¡"	onClick = "checkData()"/>
+		<input type="reset" value="ì·¨ì†Œ"/>
 	</fieldset>
 </form>
 </body>
@@ -37,17 +37,18 @@
 		var fName = document.getElementById('Facility_Name').value;
 		var lNum = document.getElementById('Lodge_Number').value;
 		var rNum = document.getElementById('Room_Number').value;
-		if(tName == ""){ //ºóÄ­ÀÎ °æ¿ì
-			alert("°ü±¤Áö¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		if(tName == ""){ //ë¹ˆì¹¸ì¸ ê²½ìš°
+			alert("ê´€ê´‘ì§€ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(fName ==""){
-			alert("½Ã¼³¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ì‹œì„¤ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(lNum ==""){
-			alert("µ¿À» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("ë™ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else if(rNum ==""){
-			alert("È£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+			alert("í˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		}else{
 			enroll.submit();
-			alert("µî·Ï µÇ¾ú½À´Ï´Ù!");
+			opener.window.location.reload();
+			alert("ë“±ë¡ ë˜ì—ˆìŠµë‹ˆë‹¤!");
 		}
 	}
 </script>

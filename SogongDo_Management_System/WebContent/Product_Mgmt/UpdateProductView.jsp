@@ -51,7 +51,7 @@
 		//성공일때
 		(function(){
 			alert("수정 성공");
-			location.href="/SogongDo_Management_System/Product/view";
+			window.opener.location.reload();
 		})();
 	</script>
 	<%		

@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="Facility_Mgmt.persistence.FacilityAttributeDAO"%>
 <%@ page import="Facility_Mgmt.persistence.FacilityAttributeDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,6 +20,7 @@
 	}
 %>
 <script type="text/javascript">
+window.opener.location.reload();
 	self.close();
 </script>
 </body>

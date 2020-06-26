@@ -2,6 +2,7 @@ package Refund_Mgmt.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,5 +33,7 @@ public class RefundDeleteController extends HttpServlet{
 		RefundDAO RefundDAO = new RefundDAO();
 		RefundDAO.deleteRefund(id);
 
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/Refund/view");
+		dispatcher.forward(req, resp);
 	}
 }

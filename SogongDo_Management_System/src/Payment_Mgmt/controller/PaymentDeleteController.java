@@ -1,7 +1,10 @@
 package Payment_Mgmt.controller;
 
 import java.io.IOException;
+import java.rmi.Remote;
+import java.rmi.server.RemoteCall;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Payment_Mgmt.persistance.PaymentDAO;
+import sun.rmi.server.Dispatcher;
 
 @WebServlet("/Payment/delete")
 public class PaymentDeleteController extends HttpServlet{
@@ -32,5 +36,7 @@ public class PaymentDeleteController extends HttpServlet{
 		PaymentDAO PaymentDAO = new PaymentDAO();
 		PaymentDAO.deletePayment(id);
 
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/Payment/view");
+		dispatcher.forward(req, resp);
 	}
 }

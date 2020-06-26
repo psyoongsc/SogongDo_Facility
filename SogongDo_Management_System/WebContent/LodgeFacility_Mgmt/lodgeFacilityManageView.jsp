@@ -1,25 +1,77 @@
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="LodgeFacility_Mgmt.persistence.LodgeFacilityDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ìˆ™ë°•ì‹œì„¤ ê´€ë¦¬</title>
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
+		
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    left: 10%;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-	<table border="3" bordercolor="lightgray" align="center">
+<%@ include file="../head_banner.jsp" %>
+<h3>ìˆ™ë°• ì‹œì„¤ ê´€ë¦¬</h3>
+	<table>
 		<thead>
 			<tr>
-				<td></td>
-				<td>ID</td>
-				<td>°ü±¤Áö¸í</td>
-				<td>½Ã¼³¸í</td>
-				<td>µ¿</td>
-				<td>È£</td>
+				<th></th>
+				<th>ID</th>
+				<th>ê´€ê´‘ì§€ëª…</th>
+				<th>ì‹œì„¤ëª…</th>
+				<th>ë™</th>
+				<th>í˜¸</th>
 			</tr>
 		</thead>
+		<tbody>
 		<%
 			List<LodgeFacilityDTO> list = (List<LodgeFacilityDTO>) request.getAttribute("lodgeFacilityList");
 			for(LodgeFacilityDTO dto : list) {
@@ -34,23 +86,24 @@
 				<td class="rNum">${ dto.roomNumber }</td>
 			</tr>
 		<%}%>
+	</tbody>
 	</table>
 	<form align="center" action="#", method="GET">
-		<input type="button" value= "½Ã¼³µî·Ï" id="btnEnroll" onclick="fEnroll()">
-		<input type="button" value= "½Ã¼³¼öÁ¤" id="btnUpdate" onclick="fUpdate()">
-		<input type="button" value= "½Ã¼³»èÁ¦" id="btnDelete" onclick="fDelete()">
+		<input class="bt" type="button" value= "ìˆ™ë°•ì‹œì„¤ ë“±ë¡í•˜ê¸°" id="btnEnroll" onclick="fEnroll()">
+		<input class="bt" type="button" value= "ìˆ™ë°•ì‹œì„¤ ìˆ˜ì •í•˜ê¸°" id="btnUpdate" onclick="fUpdate()">
+		<input class="bt" type="button" value= "ìˆ™ë°•ì‹œì„¤ ì‚­ì œí•˜ê¸°" id="btnDelete" onclick="fDelete()">
 	</form>
 </body>
 
 <script>
-	function fEnroll() { //µî·Ï
+	function fEnroll() { //ë“±ë¡
 	    var url = "/SogongDo_Management_System/LodgeFacility_Mgmt/lodgeFacilityEnrollView.jsp";
 	    var name = "lodgeFacilityEnrollView";
 	    var option = "width = 500, height = 260, top = 100, left = 200, location = no"
 	    
 	   	window.open(url, name, option);
 	}
-	function fUpdate() { //¼öÁ¤
+	function fUpdate() { //ìˆ˜ì •
 		var url = "/SogongDo_Management_System/LodgeFacility_Mgmt/lodgeFacilityUpdateView.jsp?";
 		var name = "lodgeFacilityUpdateView";
 		var option = "width = 500, height = 270, top = 100, left = 200, location = no"
@@ -72,16 +125,16 @@
 			}
 		}
 		if(cnt == 0) {
-			alert("Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+			alert("í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 		} else if (cnt > 1) {
-			alert("Ç×¸ñÀ» ÇÏ³ª¸¸ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+			alert("í•­ëª©ì„ í•˜ë‚˜ë§Œ ì„ íƒí•´ì£¼ì„¸ìš”.");
 		} else {
 			url += "lfID=" + lfId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText + "&lNum=" + lNum[ci].innerText + "&rNum=" + rNum[ci].innerText;
 
 			window.open(url, name, option);
 		}
 	}
-	function fDelete() { //»èÁ¦
+	function fDelete() { //ì‚­ì œ
 		var url = "/SogongDo_Management_System/LodgeFacility_Mgmt/lodgeFacilityDeleteView.jsp?";
 		var name = "lodgeFacilityDeleteView";
 		var option = "width = 360, height = 200, top = 100, left = 200, location = no"
@@ -98,7 +151,7 @@
 			}
 		}
 		if(cnt == 0) {
-			alert("Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+			alert("í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 		} else {
 			url += "cnt=" + cnt;
 			for(var i = 0; i<chBox.length; i++) {
@@ -107,7 +160,7 @@
 				}
 			}
 			
-			var ox = confirm("¼÷¹Ú½Ã¼³ Á¤º¸¸¦ Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?");
+			var ox = confirm("ìˆ™ë°•ì‹œì„¤ ì •ë³´ë¥¼ ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 			if(ox){
 				window.open(url, name, option);
 			}

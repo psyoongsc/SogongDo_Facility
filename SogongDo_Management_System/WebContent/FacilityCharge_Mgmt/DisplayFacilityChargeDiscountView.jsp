@@ -1,29 +1,78 @@
 <%@page import="java.util.List"%>
 
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@page import="FacilityCharge_Mgmt.persistance.FacilityChargeDiscountDTO"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>시설 요금 할인 관리</title>
-<style>
-table {
-	text-align: center;
-}
-</style>
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
+		
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    left: 10%;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+<%@ include file="../head_banner.jsp" %>
+<h3>시설 요금 할인 관리</h3>
 	<form name="selectItem" method="POST">
-		<table  width="700" border="2" bordercolor="lightgray" align="center">
+		<table>
+		<thead>
 			<tr>
 				<th>선택</th>
 				<th>시설명</th>
 				<th>할인사유</th>
 				<th>할인율</th>
 			</tr>
+		</thead>
+		<tbody>
 			<%
 				List<FacilityChargeDiscountDTO> list = (List<FacilityChargeDiscountDTO>) request.getAttribute("FacilityChargeDiscountDto");
 				for (FacilityChargeDiscountDTO dto : list) {
@@ -36,12 +85,13 @@ table {
 					<td>${dto.discountRate}%</td>
 				</tr>
 			<%}%>
+		</tbody>
 		</table>
 		
 		<div>
-			<input type="button" value="등록" onclick="location.href='/SogongDo_Management_System/FacilityCharge_Mgmt/EnrollFacilityChargeDiscountView.jsp'">
-			<input type="button" value="수정" onClick="mySubmit(1)"/>
-			<input type="button" value="삭제" onClick="mySubmit(2)"/>
+			<input class="bt" type="button" value="할인정보 등록하기" onclick="location.href='/SogongDo_Management_System/FacilityCharge_Mgmt/EnrollFacilityChargeDiscountView.jsp'">
+			<input class="bt" type="button" value="할인정보 수정하기" onClick="mySubmit(1)"/>
+			<input class="bt" type="button" value="할인정보 삭제하기" onClick="mySubmit(2)"/>
 		</div>
 	</form>
 	

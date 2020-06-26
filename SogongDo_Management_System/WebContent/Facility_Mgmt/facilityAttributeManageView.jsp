@@ -1,26 +1,78 @@
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="Facility_Mgmt.persistence.FacilityAttributeDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>ì‹œì„¤ ì†ì„± ê´€ë¦¬</title>
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
+		
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    left: 10%;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-	<table border="3" bordercolor="lightgray" align="center">
+<%@ include file="../head_banner.jsp" %>
+<h3>ì‹œì„¤ ì†ì„± ê´€ë¦¬</h3>
+	<table>
 		<thead>
 			<tr>
-				<td></td>
-				<td>ID</td>
-				<td>°ü±¤Áö¸í</td>
-				<td>½Ã¼³¸í</td>
-				<td>»óÅÂ</td>
-				<td>°ü¸®ÀÚ</td>
-				<td>ÀüÈ­¹øÈ£</td>
+				<th></th>
+				<th>ID</th>
+				<th>ê´€ê´‘ì§€ëª…</th>
+				<th>ì‹œì„¤ëª…</th>
+				<th>ìƒíƒœ</th>
+				<th>ê´€ë¦¬ì</th>
+				<th>ì „í™”ë²ˆí˜¸</th>
 			</tr>
 		</thead>
+		<tbody>
 		<%
 			List<FacilityAttributeDTO> list = (List<FacilityAttributeDTO>) request.getAttribute("facilityAttributeList");
 			for(FacilityAttributeDTO dto : list) {
@@ -36,26 +88,27 @@
 				<td class="fPhoneNumber">${ dto.facilityPhoneNumber }</td>
 			</tr>
 		<%}%>
+		</tbody>
 	</table>
 	<form align="center" method="GET">
-		<input type="button" value= "½Ã¼³µî·Ï" id="btnEnroll" onclick="fEnroll()">
-		<input type="button" value= "½Ã¼³¼öÁ¤" id="btnUpdate" onclick="fUpdate()">
-		<input type="button" value= "½Ã¼³»èÁ¦" id="btnDelete" onclick="fDelete()">
+		<input class="bt" type="button" value= "ì‹œì„¤ì†ì„± ë“±ë¡í•˜ê¸°" id="btnEnroll" onclick="fEnroll()">
+		<input class="bt" type="button" value= "ì‹œì„¤ì†ì„± ìˆ˜ì •í•˜ê¸°" id="btnUpdate" onclick="fUpdate()">
+		<input class="bt" type="button" value= "ì‹œì„¤ì†ì„± ì‚­ì œí•˜ê¸°" id="btnDelete" onclick="fDelete()">
 	</form>
 </body>
 
 <script>
-	function fEnroll() { //µî·Ï
-	    var url = "../Facility_Mgmt/facilityAttributeEnrollView.jsp";
+	function fEnroll() { //ë“±ë¡
+	    var url = "/SogongDo_Management_System/Facility_Mgmt/facilityAttributeEnrollView.jsp";
 	    var name = "facilityEnrollView";
-	    var option = "width = 500, height = 230, top = 100, left = 200, location = no"
+	    var option = "width = 500, height = 250, top = 100, left = 200, location = no"
 	    
 	   	window.open(url, name, option);
 	}
-	function fUpdate() { //¼öÁ¤
-		var url = "../Facility_Mgmt/facilityAttributeUpdateView.jsp?";
+	function fUpdate() { //ìˆ˜ì •
+		var url = "/SogongDo_Management_System/Facility_Mgmt/facilityAttributeUpdateView.jsp?";
 		var name = "facilityUpdateView";
-		var option = "width = 500, height = 200, top = 100, left = 200, location = no"
+		var option = "width = 500, height = 250, top = 100, left = 200, location = no"
 		
 		var cnt = 0;
 		var ci;
@@ -75,9 +128,9 @@
 			}
 		}
 		if(cnt == 0) {
-			alert("Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+			alert("í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 		} else if (cnt > 1) {
-			alert("Ç×¸ñÀ» ÇÏ³ª¸¸ ¼±ÅÃÇØÁÖ¼¼¿ä.");
+			alert("í•­ëª©ì„ í•˜ë‚˜ë§Œ ì„ íƒí•´ì£¼ì„¸ìš”.");
 		} else {
 			url += "fID=" + fId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText
 			 + "&fStatus=" + fState[ci].innerText + "&fManager=" + fManager[ci].innerText + "&fPhoneNumber=" + fPhoneNumber[ci].innerText;
@@ -85,8 +138,8 @@
 			window.open(url, name, option);
 		}
 	}
-	function fDelete() { //»èÁ¦
-		var url = "../Facility_Mgmt/facilityAttributeDeleteView.jsp?";
+	function fDelete() { //ì‚­ì œ
+		var url = "/SogongDo_Management_System//Facility_Mgmt/facilityAttributeDeleteView.jsp?";
 		var name = "facilityDeleteView";
 		var option = "width = 360, height = 200, top = 100, left = 200, location = no"
 		
@@ -102,7 +155,7 @@
 			}
 		}
 		if(cnt == 0) {
-			alert("Ç×¸ñÀ» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+			alert("í•­ëª©ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
 		} else {
 			url += "cnt=" + cnt;
 			for(var i = 0; i<chBox.length; i++) {
@@ -111,7 +164,7 @@
 				}
 			}
 			
-			var ox = confirm("½Ã¼³ ¼Ó¼ºÁ¤º¸¸¦ Á¤¸» »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?");
+			var ox = confirm("ì‹œì„¤ ì†ì„±ì •ë³´ë¥¼ ì •ë§ ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 			if(ox){
 				window.open(url, name, option);
 			}

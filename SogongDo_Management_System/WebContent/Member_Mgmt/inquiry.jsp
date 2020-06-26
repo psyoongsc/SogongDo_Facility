@@ -15,25 +15,16 @@ body{
 }
 
 .hd{
-    position: fixed;
-    top: 2.375rem;
-    width : 100%;
-    height : 5.375rem;
-    background-color: #CEF279;
+	text-align: center;
 }
 
 .title{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     color: #476600;
     font-size: 1.5em;
     font-weight: bold;
 }
 
 .bd{
-    position: fixed;
     top: 8rem;
     width: 100%;
 }
@@ -56,7 +47,6 @@ table {
     border-collapse: collapse;
     width: 70%;
     display:block;
-    height:450px;
     overflow:auto;
 }
 
@@ -112,13 +102,12 @@ tbody tr:hover {background-color:#f5f5f5;}
 </style>
 </head>
 <body>
-    <div class="hd">
-        <h class="title"> 관리자/직원 용 - 회원정보관리</h>
-    </div>
+<%@ include file="../head_banner.jsp" %>
+    <h3 style="text-align: center;">회원 관리</h3>
 	<div class="bd">
-        <h3 class="subtitle"> 현재 등록된 회원 정보 조회</h3>
 
         <div class="content">
+
             <table>
                 <thead>
                     <tr>

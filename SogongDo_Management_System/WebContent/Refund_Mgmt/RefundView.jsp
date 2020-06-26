@@ -12,37 +12,62 @@
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
     <title>숙박시설 환불내역</title>
 	
- 	<style type="text/css">
- 	
-        table {
-    		width: 70%;
-    		border: 5pt groove #3f51b5;
-   			border-collapse: collapse;
-            border-spacing: 0;
-            margin-bottom: 30px;
-  		}
-  		
-        .Table >thead > tr > th{
-            height: 16px;
-            border: 1px #dfdfdf solid;
-            background: #00ccff;
-            vertical-align: middle;
-            border: 1px solid #444444;
-    		padding: 10px;
-        }
-        
-        .Table >tbody > tr > td {
-    		border: 1px solid #444444;
-    		padding: 10px;
-  		}
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
 		
-	</style>
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    left: 10%;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
 	
 </head>
 <body>
-    <div class="m_contents">
-        <div class="refund_contents">
-            <h4>숙박시설 환불내역</h4>
+<%@ include file="../head_banner.jsp" %>
+    <div>
+        <div>
+            <h3>숙박시설 환불내역</h3>
            	
            	
             <table class="Table">
@@ -55,6 +80,7 @@
                         <th>환불 계좌</th>
                     </tr>
                 </thead>
+                <tbody>
                 <%
                 	List<RefundDTO> pdList = (List<RefundDTO>) request.getAttribute("refundList");
                                 	for(RefundDTO dto : pdList){
@@ -74,11 +100,13 @@
                     </tr>
                 
                 <%} %>
+            </tbody>
             </table>
-        <button class="btn" onclick="showEnrollView()">등록</button>
-        <button class="btn" onclick="deleteRefund()">삭제</button>
-        <button class="btn" onclick="updatePopUp()">수정</button>
+
         </div>
+        <button class="bt" onclick="showEnrollView()">환불내역 등록하기</button>
+        <button class="bt" onclick="deleteRefund()">환불내역 삭제하기</button>
+        <button class="bt" onclick="updatePopUp()">환불내역 수정하기</button>
     </div>
 
 </body>

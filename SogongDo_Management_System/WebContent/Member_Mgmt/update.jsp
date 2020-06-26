@@ -15,7 +15,6 @@
             border-color: green;
             border-style: groove;
             border-image: initial;
-            background-color: #FAF4C0;
         }
         #man{
             margin-left: 35px;

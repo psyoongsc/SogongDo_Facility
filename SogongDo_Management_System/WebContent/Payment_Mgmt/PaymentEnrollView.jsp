@@ -85,8 +85,6 @@
 			alert("요금 ID를 입력하세요");
 		}else if(isNaN(charge)){
 			alert("요금 ID가 숫자가 아닙니다");
-		}else if(charge == ""){ 
-			alert("할인 ID를 입력하세요");
 		}else if(isNaN(charge)){
 			alert("할인 ID가 숫자가 아닙니다");
 		}else if(method ==""){

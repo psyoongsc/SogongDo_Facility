@@ -1,0 +1,168 @@
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ page import="LodgeFacility_Mgmt.persistence.LodgeFacilityDTO"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>숙박시설 관리</title>
+    <style>
+		body{
+		    margin: 0;
+		    padding: 0;
+		    text-align: center;
+		}
+		
+		th, td {
+		    padding: 8px;
+		    text-align: center;
+		    border-bottom: 1px solid;
+		    border: 1px solid;
+		}
+		
+		thead th{
+		    background-color: #E4F7BA;
+		}
+
+		table {
+		    position: relative;
+		    margin: 10px 5px;
+		    border-collapse: collapse;
+		    display: inline-block;
+		    overflow:auto;
+		}
+		
+		tbody tr:hover {background-color:#f5f5f5;}
+
+        th, td {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+
+        .bt {
+            position: relative;
+		    border-radius: 12px;
+		    background-color: #4CAF50;
+		    border: none;
+		    left: 10%;
+		    color: white;
+		    padding: 15px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>ID</th>
+				<th>관광지명</th>
+				<th>시설명</th>
+				<th>동</th>
+				<th>호</th>
+			</tr>
+		</thead>
+		<tbody>
+		<%
+			List<LodgeFacilityDTO> list = (List<LodgeFacilityDTO>) request.getAttribute("lodgeFacilityList");
+			for(LodgeFacilityDTO dto : list) {
+				pageContext.setAttribute("dto", dto);
+		%>
+			<tr>
+				<td><input type="checkbox" class="checkBox"></td>
+				<td class="id">${ dto.lodgeFacilityID }</td>
+				<td class="tName">${ dto.touristSiteName }</td>
+				<td class="fName">${ dto.facilityName }</td>
+				<td class="lNum">${ dto.lodgeNumber }</td>
+				<td class="rNum">${ dto.roomNumber }</td>
+			</tr>
+		<%}%>
+	</tbody>
+	</table>
+	<form align="center" action="#", method="GET">
+		<input class="bt" type="button" value= "시설등록" id="btnEnroll" onclick="fEnroll()">
+		<input class="bt" type="button" value= "시설수정" id="btnUpdate" onclick="fUpdate()">
+		<input class="bt" type="button" value= "시설삭제" id="btnDelete" onclick="fDelete()">
+	</form>
+</body>
+
+<script>
+	function fEnroll() { //등록
+	    var url = "/SogongDo_Management_System/LodgeFacility_Mgmt/lodgeFacilityEnrollView.jsp";
+	    var name = "lodgeFacilityEnrollView";
+	    var option = "width = 500, height = 260, top = 100, left = 200, location = no"
+	    
+	   	window.open(url, name, option);
+	}
+	function fUpdate() { //수정
+		var url = "/SogongDo_Management_System/LodgeFacility_Mgmt/lodgeFacilityUpdateView.jsp?";
+		var name = "lodgeFacilityUpdateView";
+		var option = "width = 500, height = 270, top = 100, left = 200, location = no"
+		
+		var cnt = 0;
+		var ci;
+		
+		const chBox = document.querySelectorAll(".checkBox");
+		const lfId = document.querySelectorAll(".id");
+		const tName = document.querySelectorAll(".tName");
+		const fName = document.querySelectorAll(".fName");
+		const lNum = document.querySelectorAll(".lNum");
+		const rNum = document.querySelectorAll(".rNum");
+		
+		for(var i=0; i<chBox.length; i++) {
+			if(chBox[i].checked) {
+				cnt++;
+				ci = i;
+			}
+		}
+		if(cnt == 0) {
+			alert("항목을 선택해주세요.");
+		} else if (cnt > 1) {
+			alert("항목을 하나만 선택해주세요.");
+		} else {
+			url += "lfID=" + lfId[ci].innerText + "&tName=" + tName[ci].innerText + "&fName=" + fName[ci].innerText + "&lNum=" + lNum[ci].innerText + "&rNum=" + rNum[ci].innerText;
+
+			window.open(url, name, option);
+		}
+	}
+	function fDelete() { //삭제
+		var url = "/SogongDo_Management_System/LodgeFacility_Mgmt/lodgeFacilityDeleteView.jsp?";
+		var name = "lodgeFacilityDeleteView";
+		var option = "width = 360, height = 200, top = 100, left = 200, location = no"
+		
+		var cnt = 0;
+		var ci = 0;
+		
+		const chBox = document.querySelectorAll(".checkBox");
+		const fId = document.querySelectorAll(".id");
+		
+		for(var i=0; i<chBox.length; i++) {
+			if(chBox[i].checked) {
+				cnt++;
+			}
+		}
+		if(cnt == 0) {
+			alert("항목을 선택해주세요.");
+		} else {
+			url += "cnt=" + cnt;
+			for(var i = 0; i<chBox.length; i++) {
+				if (chBox[i].checked) {
+					url += "&fID" + ci++ + "=" + fId[i].innerText;
+				}
+			}
+			
+			var ox = confirm("숙박시설 정보를 정말 삭제하시겠습니까?");
+			if(ox){
+				window.open(url, name, option);
+			}
+		}
+	}
+</script>
+</html>

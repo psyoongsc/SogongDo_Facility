@@ -79,7 +79,9 @@ public class PaymentDAO {
 			PreparedStatement pstmt= conn.prepareStatement(sql);
 			pstmt.setInt(1, reservation_ID);
 			pstmt.setInt(2, charge_ID);
-			pstmt.setInt(3, discount_Id);
+			if(discount_Id == 0) {
+				pstmt.setNull(3, discount_Id);
+			}else {pstmt.setInt(3, discount_Id);}
 			pstmt.setString(4, payment_Method);
 			pstmt.setInt(5, payment_Amount);
 			pstmt.setString(6, payment_Date);
@@ -111,7 +113,9 @@ public class PaymentDAO {
 			PreparedStatement pstmt= conn.prepareStatement(sql);
 			pstmt.setInt(1, reservation_ID);
 			pstmt.setInt(2, charge_ID);
-			pstmt.setInt(3, discount_Id);
+			if(discount_Id == 0) {
+				pstmt.setNull(3, discount_Id);
+			}else {pstmt.setInt(3, discount_Id);}
 			pstmt.setString(4, payment_Method);
 			pstmt.setInt(5, payment_Amount);
 			pstmt.setString(6, payment_Date);
